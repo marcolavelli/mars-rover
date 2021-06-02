@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mars_rover/routes/loading_route.dart';
-import 'package:mars_rover/routes/rover_route.dart';
 
 void main() => runApp(MarsRoverApp());
 
