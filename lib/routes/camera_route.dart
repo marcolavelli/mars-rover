@@ -1,12 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mars_rover/models/latest_photo.dart';
 import 'package:mars_rover/routes/photo_route.dart';
 
-class CameraRoute extends StatelessWidget {
+class CameraRoute extends StatefulWidget {
   final List<LatestPhoto> items;
 
   CameraRoute(this.items);
 
+  @override
+  _CameraRouteState createState() => _CameraRouteState();
+}
+
+class _CameraRouteState extends State<CameraRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +29,23 @@ class CameraRoute extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PhotoRoute(items[index]),
+                builder: (context) => PhotoRoute(
+                  latestPhoto:widget.items[index],
+                  photo: NetworkImage(widget.items[index].image),
+                ),
               ),
             ),
-            child: Image(
-              image: NetworkImage(
-                items[index].image,
+            child: CachedNetworkImage(
+              imageUrl: widget.items[index].image,
+              placeholder: (context, url) => SpinKitPulse(
+                color: Colors.white,
+                size: 30.0,
               ),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        itemCount: items.length,
+        itemCount: widget.items.length,
       ),
     );
   }

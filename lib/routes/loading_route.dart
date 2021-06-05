@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:mars_rover/routes/rover_route.dart';
+import 'package:mars_rover/models/latest_photo.dart';
 import 'package:mars_rover/services/apikey.dart';
 import 'package:mars_rover/services/networking.dart';
+
+import 'camera_route.dart';
 
 class LoadingRoute extends StatefulWidget {
   @override
@@ -21,10 +23,16 @@ class _LoadingRouteState extends State<LoadingRoute> {
         'v1/rovers/perseverance/latest_photos?api_key=$APIKEY');
     var roverData = await helper.getData();
 
-    Navigator.push(
+    int lenOfLatestPhoto = (roverData['latest_photos'] as List<dynamic>).length;
+    var listOfLatestPhoto = List.generate(
+      lenOfLatestPhoto,
+      (index) => LatestPhoto.fromJson(roverData, index),
+    );
+
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => RoverRoute(roverData),
+        builder: (context) => CameraRoute(listOfLatestPhoto),
       ),
     );
   }
@@ -33,10 +41,11 @@ class _LoadingRouteState extends State<LoadingRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: SpinKitFadingCube(
-        color: Colors.white,
-        size: 30.0,
-      )),
+        child: SpinKitWave(
+          color: Colors.white,
+          size: 30.0,
+        ),
+      ),
     );
   }
 }
