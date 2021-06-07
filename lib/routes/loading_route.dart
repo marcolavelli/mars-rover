@@ -4,7 +4,7 @@ import 'package:mars_rover/models/latest_photo.dart';
 import 'package:mars_rover/services/apikey.dart';
 import 'package:mars_rover/services/networking.dart';
 
-import 'camera_route.dart';
+import 'gallery_route.dart';
 
 class LoadingRoute extends StatefulWidget {
   @override
@@ -28,6 +28,26 @@ class _LoadingRouteState extends State<LoadingRoute> {
       lenOfLatestPhoto,
       (index) => LatestPhoto.fromJson(roverData, index),
     );
+
+    /// TEST
+    var navcam = listOfLatestPhoto
+        .where((element) => element.camera.contains('NAVCAM'))
+        .length;
+    var mcz = listOfLatestPhoto
+        .where((element) => element.camera.contains('MCZ'))
+        .length;
+    var hazcam = listOfLatestPhoto
+        .where((element) => element.camera.contains('HAZCAM'))
+        .length;
+
+    print('navcam: $navcam');
+    print('mcz: $mcz');
+    print('hazcam: $hazcam');
+    lenOfLatestPhoto == (navcam + mcz + hazcam)
+        ? print('Test UI... $lenOfLatestPhoto OK')
+        : print('Test UI...  $lenOfLatestPhoto FAILED');
+
+    /// TEST (END)
 
     Navigator.pushReplacement(
       context,

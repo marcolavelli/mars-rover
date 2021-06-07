@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-
 class LatestPhoto {
   final int sol;
   final String camera;
