@@ -30,22 +30,22 @@ class _LoadingRouteState extends State<LoadingRoute> {
     );
 
     /// TEST
-    var navcam = listOfLatestPhoto
+    var navcams = listOfLatestPhoto
         .where((element) => element.camera.contains('NAVCAM'))
         .length;
-    var mcz = listOfLatestPhoto
+    var mastcams = listOfLatestPhoto
         .where((element) => element.camera.contains('MCZ'))
         .length;
-    var hazcam = listOfLatestPhoto
+    var hazcams = listOfLatestPhoto
         .where((element) => element.camera.contains('HAZCAM'))
         .length;
 
-    print('navcam: $navcam');
-    print('mcz: $mcz');
-    print('hazcam: $hazcam');
-    lenOfLatestPhoto == (navcam + mcz + hazcam)
-        ? print('Test UI... $lenOfLatestPhoto OK')
-        : print('Test UI...  $lenOfLatestPhoto FAILED');
+    print('navcams: $navcams');
+    print('mastcams: $mastcams');
+    print('hazcams: $hazcams');
+    lenOfLatestPhoto == (navcams + mastcams + hazcams)
+        ? print('test result... $lenOfLatestPhoto OK')
+        : print('test result...  $lenOfLatestPhoto FAILED');
 
     /// TEST (END)
 
@@ -60,11 +60,22 @@ class _LoadingRouteState extends State<LoadingRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SpinKitWave(
-          color: Colors.white,
-          size: 30.0,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Perseverance\nMars',
+            style: TextStyle(fontSize: 24.0),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 50.0),
+          Text('Loading Rover Data...'),
+          SizedBox(height: 10.0),
+          SpinKitWave(
+            color: Colors.white,
+            size: 30.0,
+          ),
+        ],
       ),
     );
   }

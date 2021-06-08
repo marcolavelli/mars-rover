@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mars_rover/models/latest_photo.dart';
+import 'package:mars_rover/routes/info_route.dart';
 import 'package:mars_rover/routes/photo_route.dart';
 
 class CameraRoute extends StatefulWidget {
@@ -27,22 +28,27 @@ class _CameraRouteState extends State<CameraRoute> {
     String selectedCamera;
     switch (_selectedIndex) {
       case 0:
-        selectedCamera = 'NAVCAM';
+        selectedCamera = '';
         break;
       case 1:
-        selectedCamera = 'MCZ';
+        selectedCamera = 'NAVCAM';
         break;
       case 2:
+        selectedCamera = 'MCZ';
+        break;
+      case 3:
         selectedCamera = 'HAZCAM';
         break;
       default:
         selectedCamera = '';
     }
     setState(() {
-      selectedItems = [
-        ...widget.items
-            .where((element) => element.camera.contains(selectedCamera))
-      ];
+      selectedCamera == ''
+          ? selectedItems = [...widget.items]
+          : selectedItems = [
+              ...widget.items
+                  .where((element) => element.camera.contains(selectedCamera))
+            ];
     });
   }
 
@@ -56,6 +62,19 @@ class _CameraRouteState extends State<CameraRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Gallery'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => InfoRoute(),
+          ),
+        ),
+        child: Icon(Icons.precision_manufacturing),
+        backgroundColor: Colors.amberAccent,
+      ),
       body: selectedItems.length > 0
           ? GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -88,21 +107,25 @@ class _CameraRouteState extends State<CameraRoute> {
               itemCount: selectedItems.length,
             )
           : Center(
-              child: Text('No latest photo available'),
+              child: Text('No latest photos available'),
             ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.control_camera_sharp ),
-            label: 'NAVCAM',
+            icon: Icon(Icons.camera_alt),
+            label: 'All cams',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.control_camera_sharp),
+            label: 'Navcams',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_rounded),
-            label: 'MASTERCAM',
+            label: 'Mastcams',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_outlined),
-            label: 'HAZCAM',
+            label: 'Hazcams',
           ),
         ],
         currentIndex: _selectedIndex,
