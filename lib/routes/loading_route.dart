@@ -30,6 +30,11 @@ class _LoadingRouteState extends State<LoadingRoute> {
     );
 
     /// TEST
+
+    listOfLatestPhoto.forEach((element) {
+      print(element.camera);
+    });
+
     var navcams = listOfLatestPhoto
         .where((element) => element.camera.contains('NAVCAM'))
         .length;
@@ -39,11 +44,15 @@ class _LoadingRouteState extends State<LoadingRoute> {
     var hazcams = listOfLatestPhoto
         .where((element) => element.camera.contains('HAZCAM'))
         .length;
+    var skycam = listOfLatestPhoto
+        .where((element) => element.camera.contains('SKYCAM'))
+        .length;
 
     print('navcams: $navcams');
     print('mastcams: $mastcams');
     print('hazcams: $hazcams');
-    lenOfLatestPhoto == (navcams + mastcams + hazcams)
+    print('skycam: $skycam');
+    lenOfLatestPhoto == (navcams + mastcams + hazcams + skycam)
         ? print('test result... $lenOfLatestPhoto OK')
         : print('test result...  $lenOfLatestPhoto FAILED');
 
@@ -63,18 +72,18 @@ class _LoadingRouteState extends State<LoadingRoute> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'Perseverance\nMars',
-            style: TextStyle(fontSize: 24.0),
-            textAlign: TextAlign.center,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Image.asset(
+              'assets/images/loading.png',
+              width: 110.0,
+            ),
           ),
-          SizedBox(height: 50.0),
-          Text('Loading Rover Data...'),
-          SizedBox(height: 10.0),
           SpinKitWave(
             color: Colors.white,
-            size: 30.0,
+            size: 60.0,
           ),
+
         ],
       ),
     );

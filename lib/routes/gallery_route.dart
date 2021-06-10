@@ -39,6 +39,9 @@ class _CameraRouteState extends State<CameraRoute> {
       case 3:
         selectedCamera = 'HAZCAM';
         break;
+      case 4:
+        selectedCamera = 'SKYCAM';
+        break;
       default:
         selectedCamera = '';
     }
@@ -107,7 +110,20 @@ class _CameraRouteState extends State<CameraRoute> {
               itemCount: selectedItems.length,
             )
           : Center(
-              child: Text('No latest photos available'),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Image.asset(
+                      'assets/images/loading.png',
+                      width: 120.0,
+                    ),
+                  ),
+                  Text('No latest photos available'),
+                ],
+              ),
             ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
@@ -126,6 +142,10 @@ class _CameraRouteState extends State<CameraRoute> {
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_outlined),
             label: 'Hazcams',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.catching_pokemon),
+            label: 'Skycam',
           ),
         ],
         currentIndex: _selectedIndex,
