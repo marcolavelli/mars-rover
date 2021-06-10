@@ -47,16 +47,19 @@ class _LoadingRouteState extends State<LoadingRoute> {
     var skycam = listOfLatestPhoto
         .where((element) => element.camera.contains('SKYCAM'))
         .length;
+    var supercam = listOfLatestPhoto
+        .where((element) => element.camera.contains('SUPERCAM_RMI'))
+        .length;
 
     print('navcams: $navcams');
     print('mastcams: $mastcams');
     print('hazcams: $hazcams');
+    print('skycam: $supercam');
     print('skycam: $skycam');
-    lenOfLatestPhoto == (navcams + mastcams + hazcams + skycam)
+
+    lenOfLatestPhoto == (navcams + mastcams + hazcams + supercam + skycam)
         ? print('test result... $lenOfLatestPhoto OK')
         : print('test result...  $lenOfLatestPhoto FAILED');
-
-    /// TEST (END)
 
     Navigator.pushReplacement(
       context,
@@ -76,14 +79,21 @@ class _LoadingRouteState extends State<LoadingRoute> {
             padding: const EdgeInsets.all(16.0),
             child: Image.asset(
               'assets/images/loading.png',
-              width: 110.0,
+              width: 120.0,
             ),
           ),
-          SpinKitWave(
-            color: Colors.white,
-            size: 60.0,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Download the latest photos'
+              ),
+              SpinKitThreeBounce(
+                color: Colors.white,
+                size: 15.0,
+              ),
+            ],
           ),
-
         ],
       ),
     );

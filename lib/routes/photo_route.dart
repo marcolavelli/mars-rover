@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mars_rover/models/latest_photo.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PhotoRoute extends StatelessWidget {

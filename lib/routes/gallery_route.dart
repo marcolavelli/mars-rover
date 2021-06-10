@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mars_rover/models/latest_photo.dart';
 import 'package:mars_rover/routes/info_route.dart';
+import 'package:mars_rover/routes/loading_route.dart';
 import 'package:mars_rover/routes/photo_route.dart';
 
 class CameraRoute extends StatefulWidget {
@@ -16,7 +17,8 @@ class CameraRoute extends StatefulWidget {
 
 class _CameraRouteState extends State<CameraRoute> {
   int _selectedIndex = 0;
-  List<LatestPhoto> selectedItems = [];
+  List<LatestPhoto> _selectedItems = [];
+  String _selectedCamera = '';
 
   @override
   void initState() {
@@ -25,32 +27,35 @@ class _CameraRouteState extends State<CameraRoute> {
   }
 
   void updateUI() {
-    String selectedCamera;
-    switch (_selectedIndex) {
-      case 0:
-        selectedCamera = '';
-        break;
-      case 1:
-        selectedCamera = 'NAVCAM';
-        break;
-      case 2:
-        selectedCamera = 'MCZ';
-        break;
-      case 3:
-        selectedCamera = 'HAZCAM';
-        break;
-      case 4:
-        selectedCamera = 'SKYCAM';
-        break;
-      default:
-        selectedCamera = '';
-    }
     setState(() {
-      selectedCamera == ''
-          ? selectedItems = [...widget.items]
-          : selectedItems = [
+      switch (_selectedIndex) {
+        case 0:
+          _selectedCamera = '';
+          break;
+        case 1:
+          _selectedCamera = 'NAVCAM';
+          break;
+        case 2:
+          _selectedCamera = 'MCZ';
+          break;
+        case 3:
+          _selectedCamera = 'HAZCAM';
+          break;
+        case 4:
+          _selectedCamera = 'SUPERCAM_RMI';
+          break;
+        case 5:
+          _selectedCamera = 'SKYCAM';
+          break;
+        default:
+          _selectedCamera = '';
+      }
+
+      _selectedCamera == ''
+          ? _selectedItems = [...widget.items]
+          : _selectedItems = [
               ...widget.items
-                  .where((element) => element.camera.contains(selectedCamera))
+                  .where((element) => element.camera.contains(_selectedCamera))
             ];
     });
   }
@@ -66,7 +71,17 @@ class _CameraRouteState extends State<CameraRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gallery'),
+        title: Text(_selectedCamera),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoadingRoute(),
+                )),
+            icon: Icon(Icons.update),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
@@ -78,7 +93,7 @@ class _CameraRouteState extends State<CameraRoute> {
         child: Icon(Icons.precision_manufacturing),
         backgroundColor: Colors.amberAccent,
       ),
-      body: selectedItems.length > 0
+      body: _selectedItems.length > 0
           ? GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -92,13 +107,13 @@ class _CameraRouteState extends State<CameraRoute> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => PhotoRoute(
-                        latestPhoto: selectedItems[index],
-                        photo: NetworkImage(selectedItems[index].image),
+                        latestPhoto: _selectedItems[index],
+                        photo: NetworkImage(_selectedItems[index].image),
                       ),
                     ),
                   ),
                   child: CachedNetworkImage(
-                    imageUrl: selectedItems[index].image,
+                    imageUrl: _selectedItems[index].image,
                     placeholder: (context, url) => SpinKitPulse(
                       color: Colors.white,
                       size: 30.0,
@@ -107,7 +122,7 @@ class _CameraRouteState extends State<CameraRoute> {
                   ),
                 ),
               ),
-              itemCount: selectedItems.length,
+              itemCount: _selectedItems.length,
             )
           : Center(
               child: Column(
@@ -136,7 +151,7 @@ class _CameraRouteState extends State<CameraRoute> {
             label: 'Navcams',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera_rounded),
+            icon: Icon(Icons.photo_camera_back),
             label: 'Mastcams',
           ),
           BottomNavigationBarItem(
@@ -144,7 +159,11 @@ class _CameraRouteState extends State<CameraRoute> {
             label: 'Hazcams',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.catching_pokemon),
+            icon: Icon(Icons.camera_rounded),
+            label: 'Supercam',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.flip_camera_android_rounded),
             label: 'Skycam',
           ),
         ],

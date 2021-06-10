@@ -7,27 +7,48 @@ class InfoRoute extends StatefulWidget {
 }
 
 class _InfoRouteState extends State<InfoRoute> {
+  final List<String> cameras = [
+    'NAVCAM',
+    'MCZ',
+    'HAZCAM',
+    'SUPERCAM_RMI',
+    'SKYCAM',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Information',
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                'assets/images/rover.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/images/rover.png',
+            fit: BoxFit.cover,
+          ),
         ),
       ),
+      // body: SingleChildScrollView(
+      //   child: Column(
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Image.asset(
+      //           'assets/images/rover.png',
+      //           fit: BoxFit.cover,
+      //         ),
+      //       ),
+      //       ...cameras.map(
+      //         (e) => Text(e),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
