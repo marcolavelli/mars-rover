@@ -12,6 +12,8 @@ class LoadingRoute extends StatefulWidget {
 }
 
 class _LoadingRouteState extends State<LoadingRoute> {
+  var _test = '';
+  
   @override
   void initState() {
     getRoverData();
@@ -56,10 +58,14 @@ class _LoadingRouteState extends State<LoadingRoute> {
     print('hazcams: $hazcams');
     print('skycam: $supercam');
     print('skycam: $skycam');
-
-    lenOfLatestPhoto == (navcams + mastcams + hazcams + supercam + skycam)
-        ? print('test result... $lenOfLatestPhoto OK')
-        : print('test result...  $lenOfLatestPhoto FAILED');
+    
+    setState(() {
+      lenOfLatestPhoto == (navcams + mastcams + hazcams + supercam + skycam)
+          ? _test = 'test result... $lenOfLatestPhoto OK'
+          : _test = 'test result...  $lenOfLatestPhoto FAILED';
+    });
+    
+    print(_test);
 
     Navigator.pushReplacement(
       context,
@@ -93,6 +99,10 @@ class _LoadingRouteState extends State<LoadingRoute> {
                 size: 15.0,
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(_test),
           ),
         ],
       ),

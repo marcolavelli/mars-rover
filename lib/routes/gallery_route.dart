@@ -30,21 +30,18 @@ class _CameraRouteState extends State<CameraRoute> {
     setState(() {
       switch (_selectedIndex) {
         case 0:
-          _selectedCamera = '';
-          break;
-        case 1:
           _selectedCamera = 'NAVCAM';
           break;
-        case 2:
+        case 1:
           _selectedCamera = 'MCZ';
           break;
-        case 3:
+        case 2:
           _selectedCamera = 'HAZCAM';
           break;
-        case 4:
+        case 3:
           _selectedCamera = 'SUPERCAM_RMI';
           break;
-        case 5:
+        case 4:
           _selectedCamera = 'SKYCAM';
           break;
         default:
@@ -71,7 +68,7 @@ class _CameraRouteState extends State<CameraRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_selectedCamera),
+        title: Text('Gallery: $_selectedCamera'),
         actions: [
           IconButton(
             onPressed: () => Navigator.pushReplacement(
@@ -143,20 +140,16 @@ class _CameraRouteState extends State<CameraRoute> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt),
-            label: 'All cams',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.control_camera_sharp),
-            label: 'Navcams',
+            label: 'Navcam',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.photo_camera_back),
-            label: 'Mastcams',
+            label: 'Mastcam',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_outlined),
-            label: 'Hazcams',
+            label: 'Hazcam',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_rounded),
