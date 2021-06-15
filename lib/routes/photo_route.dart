@@ -28,35 +28,34 @@ class PhotoRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: Column(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Sol - Mars day: ',
+                  'Sol: ',
                   style: TextStyle(fontSize: 12.0),
                 ),
-                Text(
-                  'Earth date: ',
-                  style: TextStyle(fontSize: 12.0),
-                ),
-                Text(
-                  'Rover Camera: ',
-                  style: TextStyle(fontSize: 12.0),
-                ),
-              ],
-            ),
-            SizedBox(width: 10.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
                 Text(
                   '${latestPhoto.sol.toString()}',
                   style: TextStyle(fontSize: 12.0),
                 ),
+                SizedBox(width: 20.0),
+                Text(
+                  'Earth: ',
+                  style: TextStyle(fontSize: 12.0),
+                ),
                 Text(
                   '${latestPhoto.earthDate}',
+                  style: TextStyle(fontSize: 12.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Rover Cam: ',
                   style: TextStyle(fontSize: 12.0),
                 ),
                 Text(
