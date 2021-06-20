@@ -65,8 +65,9 @@ class _InfoRouteState extends State<InfoRoute> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         e.description,
+                        textAlign: TextAlign.justify,
                         style: TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 12.0,
                           color: Colors.black,
                         ),
                       ),

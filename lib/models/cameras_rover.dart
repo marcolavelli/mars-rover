@@ -13,11 +13,11 @@ class CamerasRover with ChangeNotifier {
           'nsulting controllers on Earth. Located up high on the rover\'s mast,'
           ' these two cameras help engineers drive the rover around Mars. They '
           'can see an object as small as a golf ball from 82 feet (25 meters) a'
-          'way. Before Perseverance "drives blind,” the navigation cameras init'
-          'ially help ensure a safe path. Blind-drive mode occurs when engineer'
-          's command the rover to drive a certain distance in a certain directi'
-          'on, and the rover\'s computer "brains" calculate distance from wheel'
-          ' rotations without looking or checking for wheel slippage',
+          'way. Before Perseverance drives blind, the navigation cameras initia'
+          'lly help ensure a safe path. Blind-drive mode occurs when engineers '
+          'command the rover to drive a certain distance in a certain direction'
+          ', and the rover\'s computer brains calculate distance from wheel rot'
+          'ations without looking or checking for wheel slippage',
     ),
     CameraRover(
       icon: Icon(Icons.photo_camera_back),
@@ -27,7 +27,10 @@ class CamerasRover with ChangeNotifier {
           ' that is equipped with a zoom function on the Perseverance rover. Ma'
           'stcam-Z has cameras that can zoom in, focus, and take 3D pictures an'
           'd video at high speed to allow detailed examination of distant objec'
-          'ts.',
+          'ts. Think of Mastcam-Z as the Perseverance rover\'s main eyes. It is'
+          ' located near the top of the rover\'s mast (its head). It\'s a camer'
+          'a system, and it has a Zoom capability - Z for the mark of zoom! Wha'
+          't would you call it but Mastcam-Z?',
     ),
     CameraRover(
       icon: Icon(Icons.camera_outlined),
@@ -48,11 +51,15 @@ class CamerasRover with ChangeNotifier {
       icon: Icon(Icons.camera_rounded),
       label: 'SuperCam',
       title: 'SuperCam',
-      description: 'The SuperCam on the Perseverance rover examines rocks and s'
-          'oils with a camera, laser and spectrometers to seek organic compound'
-          's that could be related to past life on Mars. It can identify the ch'
-          'emical and mineral makeup of targets as small as a pencil point from'
-          ' a distance of more than 20 feet (7 meters).',
+      description: 'SuperCam is a superhero for making discoveries on Mars! Its'
+          ' cameras have super vision, and its spectrometers have super senses '
+          'for identifying the chemical makeup of Martian rocks and soil (regol'
+          'ith) that could be related to past life on Mars. SuperCam can see ac'
+          'ross great distances to measure targets not reachable by the Perseve'
+          'rance rover\'s other tools. It\'s an improved version of the ChemCam'
+          ' laser on Mars rover Curiosity: SuperCam can additionally analyze mi'
+          'nerals and molecules, and take color instead of only black-and-white'
+          ' pictures.',
     ),
     CameraRover(
       icon: Icon(Icons.center_focus_weak),

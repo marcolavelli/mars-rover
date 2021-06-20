@@ -61,8 +61,8 @@ class _LoadingRouteState extends State<LoadingRoute> {
 
     setState(() {
       lenOfLatestPhoto == (navcams + mastcams + hazcams + supercam + skycam)
-          ? _test = 'test result ... $lenOfLatestPhoto OK'
-          : _test = 'test result ... $lenOfLatestPhoto FAILED';
+          ? _test = 'Download... $lenOfLatestPhoto OK'
+          : _test = 'Download... $lenOfLatestPhoto FAILED';
     });
 
     print(_test);
