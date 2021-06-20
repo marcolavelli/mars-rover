@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mars_rover/models/cameras_rover.dart';
 import 'package:mars_rover/models/latest_photo.dart';
 import 'package:mars_rover/routes/info_route.dart';
 import 'package:mars_rover/routes/loading_route.dart';
 import 'package:mars_rover/routes/photo_route.dart';
+import 'package:provider/provider.dart';
 
 class CameraRoute extends StatefulWidget {
   final List<LatestPhoto> items;
@@ -19,6 +21,7 @@ class _CameraRouteState extends State<CameraRoute> {
   int _selectedIndex = 0;
   List<LatestPhoto> _selectedItems = [];
   String _selectedCamera = '';
+  String _selectedCameraExtended = '';
 
   @override
   void initState() {
@@ -31,18 +34,23 @@ class _CameraRouteState extends State<CameraRoute> {
       switch (_selectedIndex) {
         case 0:
           _selectedCamera = 'NAVCAM';
+          _selectedCameraExtended = 'Navigation Cameras';
           break;
         case 1:
           _selectedCamera = 'MCZ';
+          _selectedCameraExtended = 'Mastcam-Z';
           break;
         case 2:
           _selectedCamera = 'HAZCAM';
+          _selectedCameraExtended = 'Hazard Avoidance Cameras';
           break;
         case 3:
           _selectedCamera = 'SUPERCAM_RMI';
+          _selectedCameraExtended = 'SuperCam';
           break;
         case 4:
           _selectedCamera = 'SKYCAM';
+          _selectedCameraExtended = 'SkyCam';
           break;
         default:
           _selectedCamera = '';
@@ -66,9 +74,11 @@ class _CameraRouteState extends State<CameraRoute> {
 
   @override
   Widget build(BuildContext context) {
+    final camerasRover = Provider.of<CamerasRover>(context).items;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gallery: $_selectedCamera'),
+        title: Text('Gallery: $_selectedCameraExtended'),
         actions: [
           IconButton(
             onPressed: () => Navigator.pushReplacement(
@@ -76,7 +86,7 @@ class _CameraRouteState extends State<CameraRoute> {
                 MaterialPageRoute(
                   builder: (context) => LoadingRoute(),
                 )),
-            icon: Icon(Icons.update),
+            icon: Icon(Icons.refresh),
           ),
         ],
       ),
@@ -87,7 +97,7 @@ class _CameraRouteState extends State<CameraRoute> {
             builder: (context) => InfoRoute(),
           ),
         ),
-        child: Icon(Icons.precision_manufacturing),
+        child: Icon(Icons.lightbulb_outline),
         backgroundColor: Colors.amberAccent,
       ),
       body: _selectedItems.length > 0
@@ -138,28 +148,14 @@ class _CameraRouteState extends State<CameraRoute> {
               ),
             ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.control_camera_sharp),
-            label: 'Navcam',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera_back),
-            label: 'Mastcam',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_outlined),
-            label: 'Hazcam',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_rounded),
-            label: 'Supercam',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.flip_camera_android_rounded),
-            label: 'Skycam',
-          ),
-        ],
+        items: camerasRover
+            .map(
+              (e) => BottomNavigationBarItem(
+                icon: e.icon,
+                label: e.label,
+              ),
+            )
+            .toList(),
         currentIndex: _selectedIndex,
         showUnselectedLabels: true,
         selectedItemColor: Colors.amberAccent,

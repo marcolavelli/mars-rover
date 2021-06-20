@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mars_rover/models/latest_photo.dart';
@@ -13,16 +11,6 @@ class PhotoRoute extends StatelessWidget {
     required this.latestPhoto,
     required this.photo,
   });
-
-  void _savePhoto() async {
-
-    // TODO: https://pub.dev/documentation/image_picker/latest/
-    // final _picker = ImagePicker();
-    //
-    // // Step 1: Retrieve image from picker
-    // PickedFile? image = await _picker.getImage(source: ImageSource.camera);
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +54,6 @@ class PhotoRoute extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _savePhoto,
-        child: Icon(Icons.file_download),
-        backgroundColor: Colors.amberAccent,
       ),
       body: Center(
         child: PhotoView(

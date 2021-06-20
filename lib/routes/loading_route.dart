@@ -13,7 +13,7 @@ class LoadingRoute extends StatefulWidget {
 
 class _LoadingRouteState extends State<LoadingRoute> {
   var _test = '';
-  
+
   @override
   void initState() {
     getRoverData();
@@ -58,14 +58,16 @@ class _LoadingRouteState extends State<LoadingRoute> {
     print('hazcams: $hazcams');
     print('skycam: $supercam');
     print('skycam: $skycam');
-    
+
     setState(() {
       lenOfLatestPhoto == (navcams + mastcams + hazcams + supercam + skycam)
           ? _test = 'test result ... $lenOfLatestPhoto OK'
           : _test = 'test result ... $lenOfLatestPhoto FAILED';
     });
-    
+
     print(_test);
+
+    /// END TEST
 
     Navigator.pushReplacement(
       context,
@@ -91,9 +93,7 @@ class _LoadingRouteState extends State<LoadingRoute> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Download the latest photos'
-              ),
+              Text('Download the latest photos'),
               SpinKitThreeBounce(
                 color: Colors.white,
                 size: 15.0,
